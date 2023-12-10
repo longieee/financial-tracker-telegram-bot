@@ -2,7 +2,7 @@ import os
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
-SA_TELEGRAM_BOT = os.getenv("GOOGLE_SHEET_AUTH", "")
+SA_TELEGRAM_BOT = os.getenv("SA_TELEGRAM_BOT", "")
 DESTINATION_SHEET = "responses"
 
 START_MESSAGE = """Hi, I'm your Telegram bot
