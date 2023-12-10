@@ -1,0 +1,13 @@
+version: 0.1.0
+
+services:
+  telegram-bot:
+    build: .
+    image: telegram-bot:dev
+    container_name: telegram-bot
+    restart: always
+    environment:
+      - GOOGLE_SHEET_ID=$GOOGLE_SHEET_ID
+      - SA_TELEGRAM_BOT=$SA_TELEGRAM_BOT
+      - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+      - DEV_USER_ID=$DEV_USER_ID
