@@ -13,7 +13,7 @@ def restricted(func):
     @wraps(func)
     async def wrapped(update, context, *args, **kwargs):
         user_id = update.effective_user.id
-        if user_id not in ALLOWED_USERS:
+        if str(user_id) not in ALLOWED_USERS:
             logger.info(f"Unauthorized access denied for {user_id}.")
             await update.effective_message.reply_text("Hey! You are not allowed to use me!")
             raise ApplicationHandlerStop

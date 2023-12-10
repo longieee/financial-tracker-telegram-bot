@@ -27,4 +27,4 @@ Arguments:
 - Any other text left other than the above arguments is considered the Description of the transaction
 """
 
-ALLOWED_USERS = [int(os.getenv("DEV_USER_ID", 0))]
+ALLOWED_USERS = [os.getenv("DEV_USER_ID", "")]
