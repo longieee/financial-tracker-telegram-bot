@@ -20,7 +20,7 @@ def extract_entities(context_args: List[str]) -> Any:
     # Get some pre-defined data
     tags = [item.lstrip("#") for item in context_args if item.startswith("#")]
     if not tags:
-        tags = ["Other"]
+        tags = ["other"]
     # Remove tags from context args
     for tag in tags:
         try:
@@ -30,7 +30,7 @@ def extract_entities(context_args: List[str]) -> Any:
 
     payment_mode = [item for item in context_args if item.startswith("@")]
     if not payment_mode:
-        payment_mode = "Other"
+        payment_mode = "other"
     else:
         payment_mode = payment_mode[0].lstrip("@")
         # Remove payment mode from context args
@@ -66,7 +66,7 @@ def extract_entities(context_args: List[str]) -> Any:
             pass
 
     # Get amount
-    numbers = re.findall(r"\d+(?:\.\d+)?", " ".join(context_args))
+    numbers = re.findall(r"\d+(?:,\d+)?", " ".join(context_args))
     # Remove extracted money amount
     try:
         context_args.remove(numbers[0])
