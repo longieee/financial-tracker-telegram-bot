@@ -3,6 +3,7 @@ import traceback
 
 from chat_utils import must_have_args, restricted
 from const import START_MESSAGE, TELEGRAM_BOT_TOKEN
+from fastapi import FastAPI, Request
 from gsheet import Sheet
 from telegram import Update
 from telegram.ext import (
@@ -67,7 +68,7 @@ async def income(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
-if __name__ == "__main__":
+def get_application():
     application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
     # Handlers
@@ -84,4 +85,20 @@ if __name__ == "__main__":
     # Unknown handlers must be added last
     application.add_handler(unknown_handler)
 
-    application.run_polling()
+    return application
+
+
+application = get_application()
+
+app = FastAPI()
+
+
+@app.post("/webhook")
+async def webhook_handler(req: Request):
+    data = await req.json()
+    async with application:
+        await application.start()
+        await application.process_update(Update.de_json(data=data, bot=application.bot))
+        await application.stop()
+
+    return
